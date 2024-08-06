@@ -9,8 +9,16 @@ class FoodListView(ListAPIView):
     serializer_class = FoodListSerializer
 
     def get_queryset(self):
-        return FoodCategory.objects.filter(food__is_publish=True).distinct().order_by('id')
+        sort_by = self.request.query_params.get('sort_by', 'id',)
+        
+        queryset = FoodCategory.objects.filter(food__is_publish=True).distinct()
+        
+        if sort_by in ['id', '-id', 'name_ru']:
+            queryset = queryset.order_by(sort_by)
+        else:
+            queryset = queryset.order_by('id')
 
+        return queryset
 
     def list(self, request, *args, **kwargs):
         published_foods = Food.objects.filter(is_publish=True)

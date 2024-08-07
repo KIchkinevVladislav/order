@@ -23,7 +23,7 @@ API позволяет получать список блюд, которые д
 
 - Копируем код приложения в Вашу директорию:
 
-`git clone https://github.com/KIchkinevVladislav/order`
+`git clone https://github.com/KIchkinevVladislav/order.git`
 
 - Запускаем контейнеры:
 

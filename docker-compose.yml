@@ -1,0 +1,42 @@
+services:
+  db:
+    container_name: db
+    image: postgres:14.1-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - custom
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  order_app:
+    container_name:  order_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    networks:
+      - custom
+    command: ["./server-entrypoint.sh"]
+    environment:
+      DATABASE_NAME: postgres
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: '5432'
+
+networks:
+  custom:
+    driver: bridge
+
+volumes:
+  db-data:

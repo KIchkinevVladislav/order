@@ -9,10 +9,10 @@ env = environ.Env(
     SECRET_KEY=(str, 'django-insecure-49d4+4bu=qc9+^&2*ewm$t^v@hn5#@_-j%^rjx6+qiz%y)2!ze'),
     DOMAIN_NAME=(str, 'http://127.0.0.1:8000'),
 
-    DATABASE_NAME=(str, 'postgres_test'),
+    DATABASE_NAME=(str, 'postgres'),
     DATABASE_USER=(str, 'postgres'),
     DATABASE_PASSWORD=(str, 'postgres'),
-    DATABASE_HOST=(str, 'localhost'),
+    DATABASE_HOST=(str, 'db'),
     DATABASE_PORT=(str, '5432'),
 )
 
